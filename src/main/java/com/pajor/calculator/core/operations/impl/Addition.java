@@ -1,3 +1,5 @@
+package com.pajor.calculator.core.operations.impl;
+
 import com.pajor.calculator.core.operations.api.Operation;
 
 public class Addition implements Operation {
