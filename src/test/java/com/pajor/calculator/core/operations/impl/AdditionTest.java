@@ -1,12 +1,12 @@
 package com.pajor.calculator.core.operations.impl;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
-import com.pajor.calculator.core.operations.impl.Addition;
+import org.junit.jupiter.api.Test;
 
 public class AdditionTest {
 
     private final Addition addition = new Addition();
+    private final double delta = 0.000001;
 
     @Test
     void shouldAddTwoPositiveNumbers() {
@@ -15,7 +15,7 @@ public class AdditionTest {
         double expected = 7.0;
 
         double result = addition.apply(a, b);
-        Assertions.assertEquals(expected, result, 0.0001);
+        Assertions.assertEquals(expected, result, delta);
     }
 
     @Test
@@ -25,7 +25,7 @@ public class AdditionTest {
         double expected = -3.0;
 
         double result = addition.apply(a, b);
-        Assertions.assertEquals(expected, result, 0.0001);
+        Assertions.assertEquals(expected, result, delta);
     }
 
     @Test
@@ -35,7 +35,7 @@ public class AdditionTest {
         double expected = 3.0;
 
         double result = addition.apply(a, b);
-        Assertions.assertEquals(expected, result, 0.0001);
+        Assertions.assertEquals(expected, result, delta);
     }
 
     @Test   
@@ -45,7 +45,7 @@ public class AdditionTest {
         double expected = -7.0;
 
         double result = addition.apply(a, b);
-        Assertions.assertEquals(expected, result, 0.0001);
+        Assertions.assertEquals(expected, result, delta);
     }
 
     @Test
@@ -55,7 +55,7 @@ public class AdditionTest {
         double expected = 2.0;
 
         double result = addition.apply(a, b);
-        Assertions.assertEquals(expected, result, 0.0001);
+        Assertions.assertEquals(expected, result, delta);
     }
 
     @Test
@@ -65,7 +65,7 @@ public class AdditionTest {
         double expected = -2.0;     
 
         double result = addition.apply(a, b);
-        Assertions.assertEquals(expected, result, 0.0001);
+        Assertions.assertEquals(expected, result, delta);
     }
 
     @Test
@@ -75,7 +75,7 @@ public class AdditionTest {
         double expected = 0.0;  
 
         double result = addition.apply(a, b);
-        Assertions.assertEquals(expected, result, 0.0001);
+        Assertions.assertEquals(expected, result, delta);
     }
     
 }
