@@ -5,6 +5,10 @@ import com.pajor.calculator.core.operations.api.Operation;
 public class Sqrt implements Operation {
     @Override
     public double apply(double a, double b) {
-            return Math.sqrt(a);
+            if (b==a) {
+                return Math.sqrt(a);
+            } else {
+                throw new UnsupportedOperationException("Sqrt operation only supports one operand");
+            }
     }
 }
