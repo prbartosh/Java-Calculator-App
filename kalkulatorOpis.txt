@@ -1,0 +1,35 @@
+Kalulator
+
+Funkcjonalności:
+- dodawanie
+- odejmowanie
+- mnożenie
+- dzielenie
+- zmiana znaku
+- pierwiastkowanie
+- potęgowanie
+- historia operacji
+- CE/C
+- backspace
+
+Obsługa błędów:
+- dzielenie przez zero
+- niepoprawne dane wejściowe (czyli jakie??)\
+
+Warstwy aplikacji:
+- Klasa Calculator odpowiedzialna za obliczenia
+- Klasa CalculatorUI odpowiedzialna ...
+- Klasa Main, która uruchamia aplikację, inicjalizuje obiekty i łączy logikę z interfejsem
+
+
+TODO:
+- utworzenie projektu w wybranym środowisku
+- skonfigurowanie struktury katalogów (osobno logika, GUI, testy)
+- przygotownie Swift
+
+- stworzenie klasy Calculator
+- zdefiniowanie metod i atrybutów
+- zaimplementowanie testów jednostkowych (JUnit) dla każdej metody
+
+
+
