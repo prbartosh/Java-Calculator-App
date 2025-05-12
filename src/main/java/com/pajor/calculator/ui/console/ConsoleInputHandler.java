@@ -1,10 +1,8 @@
 package com.pajor.calculator.ui.console;
 
-
 import com.pajor.calculator.service.api.CalculatorService;
 
-
-class ConsoleInputHandler {
+public class ConsoleInputHandler {
     private double a;
     private double b;
     private final CalculatorService calculatorService;
@@ -15,22 +13,24 @@ class ConsoleInputHandler {
     }
 
     public void parseInput(String input) {
-        this.parts = input.strip().split(" ");
-        this.a = Double.parseDouble(parts[0]);
-        this.b = Double.parseDouble(parts[2]);
-    }
-
-    public String passToService() {
+        // Expecting input format: "number operator number"
+        parts = input.strip().split(" ");
+        if(parts.length != 3) {
+            throw new IllegalArgumentException("Input must be in format: [number] [operator] [number]");
+        }
         try {
-            return String.valueOf(calculatorService.performCalculation(parts[1], a, b));
-        } catch (Exception e) {
-            return e.getMessage();
+            a = Double.parseDouble(parts[0]);
+            b = Double.parseDouble(parts[2]);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid numeric format in input.", e);
         }
     }
 
-
-
-
-
-
+    public String passToService() throws Exception {
+        if (calculatorService.validateOperator(parts[1])) {
+            return String.valueOf(calculatorService.performCalculation(parts[1], a, b));
+        } else {
+            throw new IllegalArgumentException("Invalid operator: " + parts[1]);
+        }
+    }
 }

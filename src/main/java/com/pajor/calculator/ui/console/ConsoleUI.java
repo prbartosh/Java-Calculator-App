@@ -24,22 +24,24 @@ public class ConsoleUI implements UserInterface {
         while (true) {
             System.out.println("Provide equastion: ");
             input = getUserInput();
-
             
-            // pass input to inputHandler
-                // handle input in inputHandler
-            consoleInputHandler.parseInput(input);
-                    // check for correctness
-                    // split for parts
-                    // pass equasion to service -> performCalculation(operation, a, b)
-            String result = consoleInputHandler.passToService();
-                    // get result
-                // pass result to OutputHandler
-                    // handle output
-                        // if ok -> showResult(result)
-                        // if error -> showError(message)'
-            System.out.println(result);
+            if (input == "exit"){
+                System.out.println("Goodbye!");
+                break;
+            }
 
+            try {
+                consoleInputHandler.parseInput(input);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            
+            try {
+                String result = consoleInputHandler.passToService();
+                System.out.println("Result: " + result);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
 
     }

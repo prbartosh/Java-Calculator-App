@@ -30,6 +30,13 @@ public class CalculatorServiceImpl implements CalculatorService {
         operations.put("√", new Sqrt());
     }
 
+    public boolean validateOperator(String operator) {
+        if (operations.containsKey(operator)) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public double performCalculation(String operator, double a, double b) {
         Operation op = operations.get(operator);
