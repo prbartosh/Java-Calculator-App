@@ -9,6 +9,8 @@ public class ConsoleUI implements UserInterface {
     private final Scanner scanner = new Scanner(System.in);
     private final CalculatorService calculatorService;
     private final ConsoleInputHandler consoleInputHandler;
+    private String[] tokens;
+    private String result;
     private String input;
 
     public ConsoleUI(CalculatorService calculatorService) {
@@ -25,23 +27,19 @@ public class ConsoleUI implements UserInterface {
             System.out.println("Provide equastion: ");
             input = getUserInput();
             
-            if (input == "exit"){
-                System.out.println("Goodbye!");
-                break;
-            }
-
             try {
-                consoleInputHandler.parseInput(input);
+                tokens = consoleInputHandler.parseInput(input);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
             
             try {
-                String result = consoleInputHandler.passToService();
-                System.out.println("Result: " + result);
+                result = consoleInputHandler.passToService(tokens);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
+
+            showResult(result);
         }
 
     }

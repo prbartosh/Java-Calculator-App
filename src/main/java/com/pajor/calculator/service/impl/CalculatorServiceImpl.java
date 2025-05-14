@@ -21,15 +21,30 @@ public class CalculatorServiceImpl implements CalculatorService {
     public CalculatorServiceImpl() {
         operations.put("+", new Addition());
         operations.put("-", new Subtraction());
-        operations.put("×", new Multiplication());
         operations.put("*", new Multiplication());
         operations.put("÷", new Division());
         operations.put("/", new Division());
         operations.put("^", new Power());
-        operations.put("**", new Multiplication());
+        operations.put("**", new Power());
+        operations.put("power", new Power());
         operations.put("√", new Sqrt());
+        operations.put("sqrt", new Sqrt());
     }
 
+    @Override
+    public double performCalculation(String[] tokens) {
+        // ConvertToRPN
+
+        // Evaluate Postfix Expression
+        
+        Operation op = operations.get(operator);
+        if (op != null) {
+            return engine.calculate(op, a, b);
+        }
+        throw new UnsupportedOperationException("Operation not unsupported: " + operator);
+    }
+
+    @Override
     public boolean validateOperator(String operator) {
         if (operations.containsKey(operator)) {
             return true;
@@ -37,12 +52,5 @@ public class CalculatorServiceImpl implements CalculatorService {
         return false;
     }
 
-    @Override
-    public double performCalculation(String operator, double a, double b) {
-        Operation op = operations.get(operator);
-        if (op != null) {
-            return engine.calculate(op, a, b);
-        }
-        throw new UnsupportedOperationException("Operation not unsupported: " + operator);
-    }
+    
 }
