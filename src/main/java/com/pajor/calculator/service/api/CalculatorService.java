@@ -1,10 +1,11 @@
 package com.pajor.calculator.service.api;
 
-import java.util.Stack;
+import java.util.List;
 
 public interface CalculatorService {
-    double performCalculation(String[] tokens);
-    Stack<Double> shuntingYard(String[] tokens);
-    double evaluateRPN(Stack<Double> postfix);
+    double performCalculation(String expr);
+    List<String> tokenize(String expr);
+    List<String> toRPN(List<String> tokens);
+    double evaluateRPN(List<String> rpn);
     boolean validateOperator(String operator);
 }

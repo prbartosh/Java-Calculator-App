@@ -20,21 +20,19 @@ public class ConsoleUI implements UserInterface {
 
     @Override
     public void start() {
-        System.out.println("Welcome in Calculator!");
+        System.out.println("Welcome in Calculator!\n [type exit to quit]");
 
 
         while (true) {
             System.out.println("Provide equastion: ");
             input = getUserInput();
             
-            try {
-                tokens = consoleInputHandler.parseInput(input);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+            if (input.matches("(?i)^exit$")) {
+                System.exit(0);
             }
-            
+
             try {
-                result = consoleInputHandler.passToService(tokens);
+                result = consoleInputHandler.passToService(input);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }

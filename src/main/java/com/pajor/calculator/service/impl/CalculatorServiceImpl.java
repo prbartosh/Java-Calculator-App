@@ -1,22 +1,38 @@
 package com.pajor.calculator.service.impl;
 
 import com.pajor.calculator.service.api.CalculatorService;
-import com.pajor.calculator.core.engine.impl.SimpleCalculationEngine;
 import com.pajor.calculator.core.operations.api.Operation;
 import com.pajor.calculator.core.operations.impl.Addition;
 import com.pajor.calculator.core.operations.impl.Division;
 import com.pajor.calculator.core.operations.impl.Multiplication;
+import com.pajor.calculator.core.operations.impl.Percetage;
 import com.pajor.calculator.core.operations.impl.Power;
 import com.pajor.calculator.core.operations.impl.Sqrt;
 import com.pajor.calculator.core.operations.impl.Subtraction;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
+import java.util.List;
 
 public class CalculatorServiceImpl implements CalculatorService {
     
     private final Map<String, Operation> operations = new HashMap<>();
-    private final SimpleCalculationEngine engine = new SimpleCalculationEngine();
+    private static final Map<String, Integer> precedence = Map.of(
+        "+", 1,
+        "-", 1,
+        "*", 2,
+        "÷", 2,
+        "/", 2,
+        "%", 2,
+        "power", 3,
+        "^", 3,
+        "**", 3,
+        "sqrt", 3
+    );
+
 
     public CalculatorServiceImpl() {
         operations.put("+", new Addition());
@@ -24,6 +40,7 @@ public class CalculatorServiceImpl implements CalculatorService {
         operations.put("*", new Multiplication());
         operations.put("÷", new Division());
         operations.put("/", new Division());
+        operations.put("%", new Percetage());
         operations.put("^", new Power());
         operations.put("**", new Power());
         operations.put("power", new Power());
@@ -32,20 +49,84 @@ public class CalculatorServiceImpl implements CalculatorService {
     }
 
     @Override
-    public double performCalculation(String[] tokens) {
-        // ConvertToRPN
+    public double performCalculation(String expr) {
+        // Convert tokens to RPN
+        List<String> tokens = tokenize(expr);
+        List<String> rpn = toRPN(tokens);
 
-        // Evaluate Postfix Expression
-        
-        Operation op = operations.get(operator);
-        if (op != null) {
-            return engine.calculate(op, a, b);
-        }
-        throw new UnsupportedOperationException("Operation not unsupported: " + operator);
+        // calculate from RPN
+        return evaluateRPN(rpn);
     }
 
     @Override
-    public boolean validateOperator(String operator) {
+    public List<String> tokenize(String expr) {
+        return Arrays.asList(expr.replace("(", " ( ").replace(")", " ) ").trim().split("\\s+"));
+    }
+
+    @Override
+    public List<String> toRPN(List<String> tokens) {
+        List<String> output = new ArrayList<>();
+        Stack<String> stack = new Stack<>();
+
+        for (String token : tokens) {
+            if (token.matches("\\d+")) {
+                output.add(token);
+            } else if (precedence.containsKey(token)) {
+                while (!stack.isEmpty() &&
+                       precedence.containsKey(stack.peek()) &&
+                       precedence.get(stack.peek()) >= precedence.get(token)) {
+                    output.add(stack.pop());
+                }
+                stack.push(token);
+            } else if (token.equals("(")) {
+                stack.push(token);
+            } else if (token.equals(")")) {
+                while (!stack.isEmpty() && !stack.peek().equals("(")) {
+                    output.add(stack.pop());
+                }
+                if (stack.isEmpty() || !stack.peek().equals("(")) {
+                    throw new IllegalArgumentException("Uncorrect braces");
+                }
+                stack.pop(); // remove "("
+            } else {
+                throw new IllegalArgumentException("Unknown token: " + token);
+            }
+        }
+
+        // After processing all tokens, empty the operator stack.
+        while (!stack.isEmpty()) {
+            String top = stack.pop();
+            if (top.equals("(") || top.equals(")")) {
+                throw new IllegalArgumentException("Uncorrect braces");
+            }
+            output.add(top);
+        }
+        
+        return output;
+    }
+
+    @Override
+    public double evaluateRPN(List<String> rpn) {
+        Stack<Double> stack = new Stack<>();
+        for (String token : rpn) {
+            if (token.matches("\\d+")) {
+                stack.push(Double.parseDouble(token));
+            } else {
+                double b = stack.pop();
+                double a = stack.pop();
+                Operation op = operations.get(token);
+                if (op == null) {
+                    throw new IllegalArgumentException("Operator not found: " + token);
+                }
+                stack.push(op.apply(a, b));
+            }
+        }
+        return stack.pop();
+    }
+
+
+    @Override
+    public final boolean validateOperator(String operator) {
         if (operations.containsKey(operator)) {
             return true;
         }
