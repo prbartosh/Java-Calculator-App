@@ -4,10 +4,13 @@ import com.pajor.calculator.service.api.CalculatorService;
 import com.pajor.calculator.core.operations.api.Operation;
 import com.pajor.calculator.core.operations.impl.Addition;
 import com.pajor.calculator.core.operations.impl.Division;
+import com.pajor.calculator.core.operations.impl.Factorial;
 import com.pajor.calculator.core.operations.impl.Multiplication;
+import com.pajor.calculator.core.operations.impl.Neg;
 import com.pajor.calculator.core.operations.impl.Percetage;
 import com.pajor.calculator.core.operations.impl.Power;
 import com.pajor.calculator.core.operations.impl.Sqrt;
+import com.pajor.calculator.core.operations.impl.Root;
 import com.pajor.calculator.core.operations.impl.Subtraction;
 
 import java.util.ArrayList;
@@ -46,7 +49,15 @@ public class CalculatorServiceImpl implements CalculatorService {
         operations.put("power", new Power());
         operations.put("√", new Sqrt());
         operations.put("sqrt", new Sqrt());
+        operations.put("root", new Root());
+        operations.put("!", new Factorial());
+        operations.put("neg", new Neg());
+
     }
+
+    // public boolean isUnaryOperator(String op) {
+    //     return op.equalsIgnoreCase("sqrt");
+    // }
 
     @Override
     public double performCalculation(String expr) {
@@ -75,7 +86,8 @@ public class CalculatorServiceImpl implements CalculatorService {
                 while (!stack.isEmpty() &&
                        precedence.containsKey(stack.peek()) &&
                        precedence.get(stack.peek()) >= precedence.get(token)) {
-                    output.add(stack.pop());
+                    // if (token.matches("(?i)sqrt|√")) {}
+                        output.add(stack.pop());
                 }
                 stack.push(token);
             } else if (token.equals("(")) {
@@ -111,15 +123,33 @@ public class CalculatorServiceImpl implements CalculatorService {
         for (String token : rpn) {
             if (token.matches("\\d+")) {
                 stack.push(Double.parseDouble(token));
-            } else {
+                continue;
+            }
+            Operation op = operations.get(token);
+            
+            if (op.arity() == 2) {
                 double b = stack.pop();
                 double a = stack.pop();
-                Operation op = operations.get(token);
-                if (op == null) {
-                    throw new IllegalArgumentException("Operator not found: " + token);
-                }
                 stack.push(op.apply(a, b));
+            } else {
+                double a = stack.pop();
+                stack.push(op.apply(a));
             }
+                // } else if (token.equals("sqrt")) {
+            //     Operation op = operations.get(token);
+            //     double b = stack.pop();
+            //     double a = b;
+            //     stack.pop();
+            //     stack.push(op.apply(a, b));
+            // } else {
+            //     double b = stack.pop();
+            //     double a = stack.pop();
+            //     Operation op = operations.get(token);
+            //     if (op == null) {
+            //         throw new IllegalArgumentException("Operator not found: " + token);
+            //     }
+            //     stack.push(op.apply(a, b));
+            // }
         }
         return stack.pop();
     }
