@@ -21,7 +21,7 @@ import java.util.Stack;
 import java.util.List;
 
 public class CalculatorServiceImpl implements CalculatorService {
-    
+    /* */
     private final Map<String, Operation> operations = new HashMap<>();
     private static final Map<String, Integer> precedence = Map.of(
         "+", 1,
