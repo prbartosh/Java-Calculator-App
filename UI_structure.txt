@@ -1,0 +1,36 @@
+
+
+Vstack {
+	Spacer,
+	DisplayText,
+	Spacer,
+	Vstack {
+		Hstack { 
+			button("%"), button("n√a"), button("√"), button("AC") 
+		},
+		Hstack { 
+			button("÷"), button("×"), button("-"), button("+") 
+		},
+		Hstack { 
+			button(7), button(8), button (9), button(!) 
+		},
+		Hstack { 
+			button(4), button(5), button(6), button(^) 
+		},
+		Hstack
+			{
+			Vstack {
+				Hstack { 
+					button(1), button(2), button(3) 
+				},
+				Hstack {
+					doubleWidthButton(0), button(.)
+				},
+			},
+			Vstack { 
+			doubleHeightButton(=) 
+			},
+		}
+	}
+}
+			

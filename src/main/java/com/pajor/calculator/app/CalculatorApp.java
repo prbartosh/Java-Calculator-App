@@ -11,7 +11,7 @@ public class CalculatorApp {
         CalculatorServiceImpl calculatorService = new CalculatorServiceImpl();
         ConsoleUI consoleUI = new ConsoleUI(calculatorService);
         GUIUI guiUI = new GUIUI();
-
+        // guiUI.setFrameVisible();
 
         // consoleUI.start();
     }
