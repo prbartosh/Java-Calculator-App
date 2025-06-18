@@ -3,7 +3,6 @@ package com.pajor.calculator.ui.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;

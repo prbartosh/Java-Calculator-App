@@ -1,29 +1,23 @@
 package com.pajor.calculator.ui.gui;
 
-import java.awt.Button;
+
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 // import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import com.pajor.calculator.service.api.CalculatorService;
-import com.sun.tools.javac.Main;
 
 public class GUIUI {
-    private CalculatorService calcServ;
     private GUIInputHandler inputHandler;
     private JFrame mainFrame;
     private JPanel mainPanel;
@@ -61,7 +55,6 @@ public class GUIUI {
 
 
     public GUIUI(CalculatorService _calcServ) {
-        calcServ = _calcServ;
         inputHandler = new GUIInputHandler(_calcServ);
         SwingUtilities.invokeLater(() -> {
             mainFrame = new mainFrame();

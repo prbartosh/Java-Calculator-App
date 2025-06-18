@@ -9,12 +9,10 @@ import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
+
 import javax.swing.JButton;
 import javax.swing.JTextField;
-import javax.swing.plaf.basic.BasicBorders.MarginBorder;
 
-import com.pajor.calculator.service.api.CalculatorService;
 
 public class CustomButton extends JButton {
     CustomButton(String text, JTextField textField, GUIInputHandler inputHandler) {

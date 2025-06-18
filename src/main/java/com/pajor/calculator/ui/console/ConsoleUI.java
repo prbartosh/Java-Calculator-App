@@ -7,14 +7,11 @@ import com.pajor.calculator.ui.api.UserInterface;
 
 public class ConsoleUI implements UserInterface {
     private final Scanner scanner = new Scanner(System.in);
-    private final CalculatorService calculatorService;
     private final ConsoleInputHandler consoleInputHandler;
-    private String[] tokens;
     private String result;
     private String input;
 
     public ConsoleUI(CalculatorService calculatorService) {
-        this.calculatorService = calculatorService;
         this.consoleInputHandler = new ConsoleInputHandler(calculatorService);
     }
 
