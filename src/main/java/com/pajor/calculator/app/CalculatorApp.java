@@ -2,6 +2,8 @@ package com.pajor.calculator.app;
 
 import java.util.Scanner;
 
+import javax.swing.SwingUtilities;
+
 import com.pajor.calculator.service.impl.CalculatorServiceImpl;
 import com.pajor.calculator.ui.console.ConsoleUI;
 import com.pajor.calculator.ui.gui.GUIUI;
@@ -9,9 +11,10 @@ import com.pajor.calculator.ui.gui.GUIUI;
 public class CalculatorApp {
     public static void main(String[] args) {
         CalculatorServiceImpl calculatorService = new CalculatorServiceImpl();
-        ConsoleUI consoleUI = new ConsoleUI(calculatorService);
-        GUIUI guiUI = new GUIUI();
-        // guiUI.setFrameVisible();
+        // ConsoleUI consoleUI = new ConsoleUI(calculatorService);
+        SwingUtilities.invokeLater(() -> {
+            GUIUI guiUI = new GUIUI(calculatorService);
+        });
 
         // consoleUI.start();
     }

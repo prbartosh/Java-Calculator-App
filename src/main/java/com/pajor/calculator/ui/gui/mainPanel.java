@@ -11,6 +11,6 @@ import javax.swing.JTextField;
 public class mainPanel extends JPanel {
     mainPanel() {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        setBackground(Color.cyan);
+        setBackground(new Color(164, 180, 148));
     }
 }

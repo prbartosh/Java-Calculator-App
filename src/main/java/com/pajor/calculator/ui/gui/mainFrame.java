@@ -18,7 +18,7 @@ public class mainFrame extends JFrame {
         new JFrame("My Calculator");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(450, 600);
-        setResizable(false);
+        setResizable(true);
         setLocation(screenWidth/2 - 225, screenHeight/2 - 300);
         getContentPane().setBackground(Color.lightGray);
         setLayout(new BorderLayout());

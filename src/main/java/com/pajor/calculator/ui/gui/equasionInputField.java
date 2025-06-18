@@ -7,8 +7,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JTextField;
 
-import org.w3c.dom.Text;
-
 public class equasionInputField extends JTextField{
     equasionInputField() {
     new JTextField("0", 16);

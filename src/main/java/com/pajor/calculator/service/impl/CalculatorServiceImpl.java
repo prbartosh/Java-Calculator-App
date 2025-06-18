@@ -23,24 +23,32 @@ import java.util.List;
 public class CalculatorServiceImpl implements CalculatorService {
     /* */
     private final Map<String, Operation> operations = new HashMap<>();
-    private static final Map<String, Integer> precedence = Map.of(
-        "+", 1,
-        "-", 1,
-        "*", 2,
-        "÷", 2,
-        "/", 2,
-        "%", 2,
-        "power", 3,
-        "^", 3,
-        "**", 3,
-        "sqrt", 3
-    );
+    private final Map<String, Integer> precedence = Map.ofEntries(
+    Map.entry("+", 1),
+    Map.entry("-", 1),
+    Map.entry("*", 2),
+    Map.entry("×", 2),
+    Map.entry("÷", 2),
+    Map.entry("/", 2),
+    Map.entry("%", 2),
+    Map.entry("power", 3),
+    Map.entry("^", 3),
+    Map.entry("**", 3),
+    Map.entry("sqrt", 3),
+    Map.entry("√", 3),
+    Map.entry("!", 3),
+    Map.entry("neg", 3),
+    Map.entry("n√a", 3)
+
+);
+
 
 
     public CalculatorServiceImpl() {
         operations.put("+", new Addition());
         operations.put("-", new Subtraction());
         operations.put("*", new Multiplication());
+        operations.put("×", new Multiplication());
         operations.put("÷", new Division());
         operations.put("/", new Division());
         operations.put("%", new Percetage());
@@ -50,6 +58,7 @@ public class CalculatorServiceImpl implements CalculatorService {
         operations.put("√", new Sqrt());
         operations.put("sqrt", new Sqrt());
         operations.put("root", new Root());
+        operations.put("n√a", new Root());
         operations.put("!", new Factorial());
         operations.put("neg", new Neg());
 

@@ -14,12 +14,11 @@ import javax.swing.JTextField;
 public class inputPanel extends JPanel{
     JTextField textField;
 
-    inputPanel(JFrame mainFrame) {
+    inputPanel(JFrame mainFrame, JTextField _textField) {
         setLayout(new BorderLayout(5,5));
-        setPreferredSize(new Dimension(mainFrame.getWidth(), 20));
-        setMaximumSize(new Dimension(1000, 100));
-        setBackground(Color.lightGray);
-        textField = new equasionInputField();
+        setPreferredSize(new Dimension(mainFrame.getWidth(), 40));
+        setBackground(new Color(164, 180, 148));
+        textField = _textField;
     
         add(textField, BorderLayout.CENTER);
     }
