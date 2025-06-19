@@ -20,4 +20,5 @@ public class inputPanel extends JPanel{
     
         add(textField, BorderLayout.CENTER);
     }
+
 }

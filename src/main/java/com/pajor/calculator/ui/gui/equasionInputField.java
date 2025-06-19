@@ -13,6 +13,6 @@ public class equasionInputField extends JTextField{
     setMargin(new Insets(10,5,10,5));
     Font fo = new Font("Serif", Font.BOLD, 20);
     setFont(fo);
-    setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+    setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 }
 }

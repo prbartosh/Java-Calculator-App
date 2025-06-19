@@ -89,7 +89,7 @@ public class CalculatorServiceImpl implements CalculatorService {
         Stack<String> stack = new Stack<>();
 
         for (String token : tokens) {
-            if (token.matches("\\d+")) {
+            if (token.matches("\\d+") || token.matches("-?\\d*\\.\\d+")) {
                 output.add(token);
             } else if (precedence.containsKey(token)) {
                 while (!stack.isEmpty() &&
@@ -130,7 +130,7 @@ public class CalculatorServiceImpl implements CalculatorService {
     public double evaluateRPN(List<String> rpn) {
         Stack<Double> stack = new Stack<>();
         for (String token : rpn) {
-            if (token.matches("\\d+")) {
+            if (token.matches("\\d+") || token.matches("-?\\d*\\.\\d+")) {
                 stack.push(Double.parseDouble(token));
                 continue;
             }

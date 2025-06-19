@@ -15,6 +15,10 @@ public class CalculatorApp {
         SwingUtilities.invokeLater(() -> {
             GUIUI guiUI = new GUIUI(calculatorService);
         });
+        // String input = "2.2 + 2";
+        // var tokens = calculatorService.tokenize(input);
+        // var rpn = calculatorService.toRPN(tokens);
+        // System.out.println(rpn);
 
         // consoleUI.start();
     }

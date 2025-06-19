@@ -15,6 +15,8 @@ import javax.swing.JTextField;
 
 
 public class CustomButton extends JButton {
+    // GUIInputHandler inputHandler;
+    
     CustomButton(String text, JTextField textField, GUIInputHandler inputHandler) {
         new JButton() {
         @Override
@@ -59,23 +61,7 @@ public class CustomButton extends JButton {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Button " + text + " clicked!");
                 // rest logic
-                if (text == "AC") {
-                    textField.setText("");
-                } else if (text == ".") {
-                    textField.setText("."+textField.getText());
-                } else if (text == "=") {
-                    // wykonaj obliczenia ->
-                    try {
-                        String result = inputHandler.passToService(textField.getText());
-                        textField.setText(result);
-                    } catch (Exception exception) {
-                        textField.setText(exception.toString());
-                    }
-                    
-                } else {
-                    textField.setText(text + " " + textField.getText());
-                }
-                
+                inputHandler.onAction(text, textField);
             }
         });
     }
