@@ -15,7 +15,6 @@ public class equasionInputField extends JTextField{
 
     private void handleSpaceLogic(String text, char lastChar, char pressedChar) {
         if (lastChar == ' ' && pressedChar == ' ') {
-            // block double spaces
         } else if (lastChar == ' ' && pressedChar != ' ') {
             setText(text + " " + pressedChar);
         } else if (!Character.isLetterOrDigit(lastChar) && !Character.isLetterOrDigit(pressedChar)) {
@@ -53,7 +52,6 @@ public class equasionInputField extends JTextField{
 
         @Override
         public void keyPressed(KeyEvent e) {
-            // handleHistory(e);
         }
 
         @Override
