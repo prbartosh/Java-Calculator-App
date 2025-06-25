@@ -1,4 +1,4 @@
-# 🧮 Kalkulator
+# 🧮 Calkulator
 
 A modern, extensible calculator application written in Java, featuring both a console and graphical user interface (GUI). Designed for clarity, flexibility, and ease of use.
 
