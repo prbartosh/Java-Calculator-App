@@ -12,15 +12,10 @@ public class CalculatorApp {
     public static void main(String[] args) {
         CalculatorServiceImpl calculatorService = new CalculatorServiceImpl();
         // ConsoleUI consoleUI = new ConsoleUI(calculatorService);
-        SwingUtilities.invokeLater(() -> {
-            GUIUI guiUI = new GUIUI(calculatorService);
-        });
-        // String input = "2.2 + 2";
-        // var tokens = calculatorService.tokenize(input);
-        // var rpn = calculatorService.toRPN(tokens);
-        // System.out.println(rpn);
+        GUIUI guiUI = new GUIUI(calculatorService);
 
         // consoleUI.start();
+        SwingUtilities.invokeLater(() -> { guiUI.startGUIUI();});
     }
 
 

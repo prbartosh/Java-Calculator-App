@@ -55,12 +55,12 @@ public class GUIUI {
 
 
     public GUIUI(CalculatorService _calcServ) {
-        inputHandler = new GUIInputHandler(_calcServ);
         SwingUtilities.invokeLater(() -> {
+            inputHandler = new GUIInputHandler(_calcServ);
+            textField = new equasionInputField(inputHandler);
             mainFrame = new mainFrame();
-            mainPanel = new mainPanel();
-            textField = new equasionInputField();
             inputPanel = new inputPanel(mainFrame, textField);
+            mainPanel = new mainPanel(textField, inputHandler);
             // mainPanel.setBackground(new Color(164, 180, 148));
             buttonsPanel.setBackground(new Color(164, 180, 148));
             mainPanel.add(Box.createHorizontalStrut(10));
@@ -81,13 +81,12 @@ public class GUIUI {
             mainPanel.add(Box.createHorizontalStrut(10));
             mainFrame.setContentPane(mainPanel);
             mainFrame.setLocationRelativeTo(null);
-            mainFrame.setVisible(true);
+            mainFrame.setVisible(false);
         });
-        
-    
-        
-        
-
     }
+
+    public void startGUIUI() {
+        mainFrame.setVisible(true);
+    };
 
 }

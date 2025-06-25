@@ -39,9 +39,44 @@ public class CalculatorServiceImpl implements CalculatorService {
     Map.entry("!", 3),
     Map.entry("neg", 3),
     Map.entry("n√a", 3)
+    );
+    private final List<HistoryEntry> history = new ArrayList<>();
 
-);
+    private static int historyIndex;
+    static {
+        historyIndex = 0;
+    }
 
+    @Override
+    public void addToHistory(String equation, double result) {
+        history.add(new HistoryEntry(equation, result));
+        historyIndex++;
+    }
+
+    @Override
+    public String getFromHistory(int direction) {
+        System.out.println("history size: " + history.size());
+        System.out.println("HistoryIndex before: " + historyIndex);
+        if (direction >= 0 && (historyIndex - 1 >= 0)) {
+            historyIndex--;
+        } else if (direction < 0 && historyIndex + 1 <= history.size()-1) {
+            historyIndex++;
+        } else if (direction < 0 && historyIndex + 1 == history.size()) {
+            historyIndex++;
+        }
+        System.out.println("HIstoryIndex after: " + historyIndex);
+        
+        if (history.size() > 0 && historyIndex < history.size()) {
+            HistoryEntry entry = history.get(historyIndex);
+            String entryString = entry.getEquation() + " = " + entry.getResult();
+            return entryString;
+        } else if (history.size() == historyIndex){
+            return "";
+        } else {
+            return "No history yet!";
+        }
+        
+    }
 
 
     public CalculatorServiceImpl() {
@@ -68,20 +103,26 @@ public class CalculatorServiceImpl implements CalculatorService {
     //     return op.equalsIgnoreCase("sqrt");
     // }
 
+   
+
     @Override
     public double performCalculation(String expr) {
         // Convert tokens to RPN
         List<String> tokens = tokenize(expr);
         List<String> rpn = toRPN(tokens);
 
+        double result = evaluateRPN(rpn);
+        addToHistory(expr, result);
         // calculate from RPN
-        return evaluateRPN(rpn);
+        return result;
     }
 
     @Override
     public List<String> tokenize(String expr) {
         return Arrays.asList(expr.replace("(", " ( ").replace(")", " ) ").trim().split("\\s+"));
     }
+
+    
 
     @Override
     public List<String> toRPN(List<String> tokens) {

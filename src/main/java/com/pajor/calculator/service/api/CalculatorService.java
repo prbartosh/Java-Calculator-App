@@ -8,4 +8,6 @@ public interface CalculatorService {
     List<String> toRPN(List<String> tokens);
     double evaluateRPN(List<String> rpn);
     boolean validateOperator(String operator);
+    public void addToHistory(String equation, double result);
+    public String getFromHistory(int direction);
 }
