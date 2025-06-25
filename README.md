@@ -51,11 +51,17 @@ A modern, extensible calculator application written in Java, featuring both a co
 - Type equations like `2 + 2`, `sqrt 9`, `3 !`, or `2 ^ 8`.
 - Type `exit` to quit.
 
+- ![image](https://github.com/user-attachments/assets/70fb33fd-8f53-43c1-85c2-2e1df496f7b0)
+
+
 ### GUI
 
 - Click buttons or type using your keyboard.
 - Supports all operations listed above.
 - View calculation history and recall previous results.
+
+- ![image](https://github.com/user-attachments/assets/d1017409-d89f-4443-8a4d-8081e146cb1f)
+
 
 ---
 
