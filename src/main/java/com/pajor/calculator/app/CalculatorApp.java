@@ -1,7 +1,9 @@
 package com.pajor.calculator.app;
 
+
 import javax.swing.SwingUtilities;
 import com.pajor.calculator.service.impl.CalculatorServiceImpl;
+import com.pajor.calculator.ui.console.ConsoleUI;
 import com.pajor.calculator.ui.gui.GUIUI;
 
 public class CalculatorApp {
@@ -10,10 +12,11 @@ public class CalculatorApp {
         // ConsoleUI consoleUI = new ConsoleUI(calculatorService);
         GUIUI guiUI = new GUIUI(calculatorService);
 
+        
+
         // consoleUI.start();
         SwingUtilities.invokeLater(() -> { guiUI.startGUIUI();});
     }
-
 
 }
 
