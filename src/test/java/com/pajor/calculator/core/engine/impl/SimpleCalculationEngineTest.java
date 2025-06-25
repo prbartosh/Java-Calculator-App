@@ -1,7 +1,5 @@
 package com.pajor.calculator.core.engine.impl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
