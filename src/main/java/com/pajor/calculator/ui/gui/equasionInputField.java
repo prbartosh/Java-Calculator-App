@@ -13,21 +13,6 @@ import javax.swing.JTextField;
 
 public class equasionInputField extends JTextField{
 
-    private void handleSpaceLogic(String text, char lastChar, char pressedChar) {
-        if (lastChar == ' ' && pressedChar == ' ') {
-        } else if (lastChar == ' ' && pressedChar != ' ') {
-            setText(text + " " + pressedChar);
-        } else if (!Character.isLetterOrDigit(lastChar) && !Character.isLetterOrDigit(pressedChar)) {
-            setText(text + pressedChar);
-        } else if (Character.isLetterOrDigit(lastChar) && Character.isLetterOrDigit(pressedChar)) {
-            setText(text + pressedChar);
-        } else if (!Character.isLetterOrDigit(lastChar) && Character.isLetterOrDigit(pressedChar)) {
-            setText(text + " " + pressedChar);
-        } else if (Character.isLetterOrDigit(lastChar) && !Character.isLetterOrDigit(pressedChar)) {
-            setText(text + " " + pressedChar);
-        }
-        setCaretPosition(getText().length());
-    }
     
     public equasionInputField(GUIInputHandler inputHandler) {
     new JTextField("0", 16);
@@ -41,18 +26,10 @@ public class equasionInputField extends JTextField{
 
     addKeyListener(new KeyListener() {
         @Override
-        public void keyTyped(KeyEvent e) {
-            String text = getText();
-            char lastChar = text.isEmpty() ? ' ' : text.charAt(text.length() - 1);
-            char pressedChar = e.getKeyChar();
-
-            handleSpaceLogic(text, lastChar, pressedChar);
-            e.consume();
-        }
+        public void keyTyped(KeyEvent e) {}
 
         @Override
-        public void keyPressed(KeyEvent e) {
-        }
+        public void keyPressed(KeyEvent e) {}
 
         @Override
         public void keyReleased(KeyEvent e) {}

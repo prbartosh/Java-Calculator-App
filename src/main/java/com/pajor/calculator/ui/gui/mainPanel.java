@@ -24,6 +24,42 @@ public class mainPanel extends JPanel {
         }
     }
 
+    private void handleSpaceLogic(KeyEvent e, GUIInputHandler inputHandler) {
+        
+        String text = textField.getText();
+        char lastChar = text.isEmpty() ? ' ' : text.charAt(text.length() - 1);
+        char pressedChar = e.getKeyChar();
+
+        if (pressedChar != '\b' || pressedChar == 'c') {
+            if (lastChar == ' ' && pressedChar == ' ') {
+            } else if (lastChar == ' ' && pressedChar != ' ') {
+                textField.setText(text + " " + pressedChar);
+            } else if (!Character.isLetterOrDigit(lastChar) && !Character.isLetterOrDigit(pressedChar)) {
+                textField.setText(text + pressedChar);
+            } else if (Character.isLetterOrDigit(lastChar) && Character.isLetterOrDigit(pressedChar)) {
+                textField.setText(text + pressedChar);
+            } else if (!Character.isLetterOrDigit(lastChar) && Character.isLetterOrDigit(pressedChar)) {
+                if (lastChar == '.') {
+                    textField.setText(text + pressedChar);
+                } else {
+                    textField.setText(text + " " + pressedChar);
+                }
+            } else if (Character.isLetterOrDigit(lastChar) && !Character.isLetterOrDigit(pressedChar)) {
+                if (pressedChar == '.' || pressedChar == ',') {
+                    textField.setText(text + ".");
+                } else {
+                    textField.setText(text + " " + pressedChar);
+                }
+            }
+            // textField.setCaretPosition(textField.getText().length());
+            e.consume();
+        } else {
+            System.out.println("Backspace");
+            textField.setText(text.substring(0, text.length()-1));
+            }
+        
+    }
+
     private void handleClear(KeyEvent e) {
         if (e.getKeyChar() == 'c') {
             textField.setText("");
@@ -55,6 +91,7 @@ public class mainPanel extends JPanel {
                     handleEnterOrEquals(e, inputHandler);
                     handleHistory(e, inputHandler);
                 } else if (e.getID() == KeyEvent.KEY_TYPED) {
+                    handleSpaceLogic(e, inputHandler);
                     handleClear(e);
                 }
                 return false;
