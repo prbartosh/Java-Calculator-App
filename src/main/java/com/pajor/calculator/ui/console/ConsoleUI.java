@@ -25,7 +25,7 @@ public class ConsoleUI implements UserInterface {
             input = getUserInput();
             
             if (input.matches("(?i)^exit$")) {
-                System.exit(0);
+                break;
             }
 
             try {
